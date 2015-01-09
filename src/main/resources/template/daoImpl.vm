@@ -1,7 +1,6 @@
 package ${packageName};
 
 import ${modelLongClass};
-import com.tmall.vertical.freemall.dao.db.BaseDao;
 import ${daoLongClass};
 
 import java.util.List;
