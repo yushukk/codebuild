@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <constant name="modelDir" value="freemall-common"/>
+    <constant name="basePackage" value="com.tmall.freemall.common.model.dataobject.crm"/>
+    <constant name="daoDir" value="freemall-dao"/>
+    <table name="member_level" desc="会员等级设置">
+        <tasks>
+            <task name="model"/>
+            <task name="sqlmap"/>
+            <task name="dao"/>
+            <task name="daoImpl"/>
+        </tasks>
+    </table>
+    <table name="member_extend" desc="会员拓展信息设置">
+        <tasks>
+            <task name="model"/>
+            <task name="sqlmap"/>
+            <task name="dao"/>
+            <task name="daoImpl"/>
+        </tasks>
+    </table>
+
+    <tasks>
+        <task name="model"
+              class="org.erik.code.genertator.code.ModelCodeGenerator">
+            <property name="template" value="template/model.vm"/>
+            <property name="beginFix" value=""/>
+            <property name="endFix" value="DO"/>
+            <property name="suffix" value=".java"/>
+            <property name="moduledir" value="${modelDir}"/>
+            <property name="srcdir" value="src/main/java"/>
+            <property name="package" value="${basePackage}"/>
+        </task>
+        <task name="sqlmap"
+              class="org.erik.code.genertator.code.SqlMapCodeGenerator">
+            <property name="template" value="template/sqlMap.vm"/>
+            <property name="beginFix" value=""/>
+            <property name="endFix" value="_sqlmap_mapping"/>
+            <property name="suffix" value=".xml"/>
+            <property name="moduledir" value="${daoDir}"/>
+            <property name="srcdir" value="src/main/resources"/>
+            <property name="package" value="sql"/>
+        </task>
+        <task name="dao"
+              class="org.erik.code.genertator.code.DaoGenerate">
+            <property name="template" value="template/dao.vm"/>
+            <property name="beginFix" value=""/>
+            <property name="endFix" value="DAO"/>
+            <property name="suffix" value=".java"/>
+            <property name="moduledir" value="${daoDir}"/>
+            <property name="srcdir" value="src/main/java"/>
+            <property name="package" value="com.tmall.vertical.freemall.dao.db.crm"/>
+        </task>
+        <task name="daoImpl"
+              class="org.erik.code.genertator.code.DaoImplCodeGenerate">
+            <property name="template" value="template/daoImpl.vm"/>
+            <property name="beginFix" value=""/>
+            <property name="endFix" value="DAOImpl"/>
+            <property name="suffix" value=".java"/>
+            <property name="moduledir" value="${daoDir}"/>
+            <property name="srcdir" value="src/main/java"/>
+            <property name="package" value="com.tmall.vertical.freemall.dao.db.crm.impl"/>
+        </task>
+    </tasks>
+</config>

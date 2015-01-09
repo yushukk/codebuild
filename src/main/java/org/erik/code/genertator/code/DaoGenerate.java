@@ -1,0 +1,41 @@
+package org.erik.code.genertator.code;
+
+import org.apache.velocity.VelocityContext;
+import org.erik.code.context.EasyCodeContext;
+import org.erik.code.model.Table;
+import org.erik.code.model.Task;
+import org.erik.code.utils.NameUtils;
+
+import java.util.Map;
+
+/**
+ * Created by wandong.cwd on 2014/12/25.
+ */
+public class DaoGenerate extends AbstractEasyCodeGenerator   {
+    @Override
+    public void generate(Table table, Task task, VelocityContext context, StringBuilder template) {
+
+        context.put("packageName", task.getPackageName());
+
+        context.put("fileName", NameUtils.getNameWordFirstUpper(table.getName()));
+
+        String generatedShotClassName = task.getGeneratedShotClassName(table.getName());
+        context.put("generatedShotClassName",generatedShotClassName);
+        context.put("firstLowerEntityName", NameUtils.getNameWordFirstLower(table.getName()));
+
+        context.put("entityName",NameUtils.getNameWordFirstUpper(table.getName()));
+
+        //所有的任务配置信息
+        Map<String, Task> tasks = EasyCodeContext.getAllTask();
+        Task modelTask = tasks.get("model");
+
+        //放入bean的小写开头的类名
+        context.put("modelShortLowerClass",modelTask.getGeneratedShotLowerClassName(table.getName()));
+        //放入bean的大写开头的类名
+        context.put("modelShortClass",modelTask.getGeneratedShotClassName(table.getName()));
+        //放入bean的全路径类名
+        context.put("modelLongClass", modelTask.getGeneratedReferenceClassName(table.getName()));
+
+
+    }
+}

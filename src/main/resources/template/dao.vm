@@ -1,0 +1,37 @@
+package ${packageName};
+
+import ${modelLongClass};
+import java.util.List;
+
+/**
+* ${table.desc}DAO操作类
+*
+* User: ${creator}
+* Date: ${date}
+*/
+public interface ${generatedShotClassName} {
+
+
+    /**
+    * insert ${firstLowerEntityName}
+    * @param ${modelShortLowerClass}
+    * @return
+    */
+    public Integer insert${entityName}(${modelShortClass} ${modelShortLowerClass});
+
+    /**
+    * update ${firstLowerEntityName}
+    * @param ${modelShortLowerClass}
+    * @return
+    */
+    public Integer update${entityName}(${modelShortClass} ${modelShortLowerClass});
+
+    /**
+    * get ${firstLowerEntityName}List
+    * @param ${modelShortLowerClass}
+    * @return
+    */
+    public List<${modelShortClass}> get${entityName}List(${modelShortClass} ${modelShortLowerClass});
+
+
+}

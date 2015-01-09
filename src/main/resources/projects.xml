@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <project name="zhi"
+             class="org.erik.code.genertator.project.DefaultProjectGenerator">
+        <property name="templetaDir" value="projectTemplate/"/>
+        <property name="groupId" value="org.erik.test"/>
+        <property name="artifactId" value="zhi"/>
+        <property name="targetDir" value="D:/code/"/>
+    </project>
+
+</config>

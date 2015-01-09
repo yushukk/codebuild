@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <!--<jdbc name="dialect" value="oracle"/>-->
+    <!--<jdbc name="driverClassName" value="oracle.jdbc.OracleDriver"/>-->
+    <!--<jdbc name="url" value="jdbc:oracle:thin:@localhost:1522/test"/>-->
+    <!--<jdbc name="username" value="test"/>-->
+    <!--<jdbc name="password" value="test"/>-->
+
+    <jdbc name="dialect" value="mysql"/>
+    <jdbc name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <jdbc name="url" value="jdbc:mysql://10.249.193.126:3403/tmall_brand_crm?useUnicode=true&amp;characterEncoding=utf-8"/>
+    <jdbc name="username" value="tmall_brand_crm"/>
+    <jdbc name="password" value="c1dc06122c52aa868e61f2e425a3d1dc"/>
+
+    <constant name="encoding" value="UTF-8"/>
+    <constant name="templateDir" value="template"/>
+    <constant name="targetDir" value="D:\code\branches\20150106_163695_crm_1\freemall"/>
+    <constant name="creator" value="wandong.cwd"/>
+
+    <convert dbType="BIGINT" jdbcType="BIGINT" javaType="java.lang.Long"/>
+    <convert dbType="INT" jdbcType="INT" javaType="java.lang.Integer"/>
+    <convert dbType="BIGINT UNSIGNED" jdbcType="BIGINT UNSIGNED" javaType="java.lang.Long"/>
+    <convert dbType="VARCHAR" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    <convert dbType="SYS.XMLTYPE" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
+    <convert dbType="timestamp" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    <convert dbType="datetime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    <convert dbType="BLOB" jdbcType="BLOB" javaType="java.lang.Byte[]"/>
+
+    <include file="tables.xml"/>
+    <!--<include file="projects.xml"/>-->
+
+</config>

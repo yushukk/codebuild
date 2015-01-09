@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+
+    <typeAlias alias="${modelShortClass}" type="${modelLongClass}"/>
+
+    <!--
+    开发负责人：
+    功能说明：请说明SQL应用场景
+    前台 或 后台：
+    频率：请说明qps/tps
+    分表数量：多少个分表/单表是否
+    是否有缓存：
+    缓存失效时间：
+    数据量及增长趋势：请说明现有多少条，每天的数据增长量，至少半年的数据预估
+    -->
+    <!-- insert into 基本语句 -->
+    <insert id="${lowerTable}.insert" parameterClass="${modelShortClass}">
+        insert into ${table.name}(${columns})
+        values(${properties})
+    </insert>
+
+    <select id="${lowerTable}.select" parameterClass="${modelShortClass}" resultClass="${modelShortClass}">
+        select
+#foreach($column in ${table.columns})
+#if(${velocityCount}==${table.columns.size()})
+        ${column.name} as ${column.camelName}
+#else
+        ${column.name} as ${column.camelName},
+#end
+#end
+        from ${table.name} WHERE 1 = 1
+        <dynamic>
+#foreach($column in ${table.columns})
+            <isNotNull property="${column.camelName}" prepend="and">
+                ${column.name} = #${column.camelName}#
+            </isNotNull>
+#end
+        </dynamic>
+    </select>
+
+    <update id="${lowerTable}.update" parameterClass="${modelShortClass}">
+        update ${table.name}  set
+#foreach($column in ${table.columns})
+#if(${velocityCount}==${table.columns.size()})
+        ${column.name}=#${column.camelName}#
+#else
+        ${column.name}=#${column.camelName}#,
+#end
+#end
+        where id=#id#
+    </update>
+
+
+</sqlMap>

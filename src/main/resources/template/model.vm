@@ -1,0 +1,37 @@
+package ${packageName};
+
+import java.io.Serializable;
+#foreach($im in ${importList})
+import ${im};
+#end
+
+/**
+* ${table.desc}
+*
+* User: ${creator}
+* Date: ${date}
+*/
+public class ${modelGeneratedShotClassName}  implements Serializable{
+
+    /** serialVersionUID */
+    private static final long serialVersionUID = ${serialVersionUID};
+
+#foreach($column in ${table.columns})
+    #if(${column.comment})
+    /** ${column.comment} */
+    #end
+private ${column.javaType} ${column.camelName};
+
+#end
+
+#foreach($column in ${table.columns})
+    public ${column.javaType} get${column.firstUpperName}() {
+        return ${column.camelName};
+    }
+
+    public void set${column.firstUpperName}(${column.javaType} ${column.camelName}) {
+        this.${column.camelName} = ${column.camelName};
+    }
+
+#end
+}

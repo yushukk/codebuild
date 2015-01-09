@@ -1,0 +1,47 @@
+package ${packageName};
+
+import ${modelLongClass};
+import com.tmall.vertical.freemall.dao.db.BaseDao;
+import ${daoLongClass};
+
+import java.util.List;
+
+/**
+* ${table.desc}DAO操作类
+*
+* User: ${creator}
+* Date: ${date}
+*/
+public class ${generatedShotClassName}   extends BaseDao implements ${daoShortClass}{
+
+
+    /**
+    * insert ${firstLowerEntityName}
+    * @param ${modelShortLowerClass}
+    * @return
+    */
+    @Override
+    public Integer insert${entityName}(${modelShortClass} ${modelShortLowerClass}) {
+        return sqlMapClientNormal.update("${firstLowerEntityName}.insert" , ${modelShortLowerClass});
+    }
+
+    /**
+    * update ${firstLowerEntityName}
+    * @param ${modelShortLowerClass}
+    * @return
+    */
+    @Override
+    public Integer update${entityName}(${modelShortClass} ${modelShortLowerClass}) {
+        return sqlMapClientNormal.update("${firstLowerEntityName}.update" , ${modelShortLowerClass});
+    }
+
+    /**
+    * get ${firstLowerEntityName}List
+    * @param ${modelShortLowerClass}
+    * @return
+    */
+    @Override
+    public List<${modelShortClass}> get${entityName}List(${modelShortClass} ${modelShortLowerClass}) {
+        return sqlMapClientNormal.queryForList("${firstLowerEntityName}.select" , ${modelShortLowerClass});
+    }
+}
