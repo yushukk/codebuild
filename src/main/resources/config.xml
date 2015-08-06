@@ -7,11 +7,7 @@
     <!--<jdbc name="username" value="test"/>-->
     <!--<jdbc name="password" value="test"/>-->
 
-    <jdbc name="dialect" value="mysql"/>
-    <jdbc name="driverClassName" value="com.mysql.jdbc.Driver"/>
-    <jdbc name="url" value="jdbc:mysql://10.249.193.126:3403/tmall_brand_crm?useUnicode=true&amp;characterEncoding=utf-8"/>
-    <jdbc name="username" value="tmall_brand_crm"/>
-    <jdbc name="password" value="c1dc06122c52aa868e61f2e425a3d1dc"/>
+
 
     <constant name="encoding" value="UTF-8"/>
     <constant name="templateDir" value="template"/>
