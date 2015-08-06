@@ -9,6 +9,7 @@ import org.erik.code.model.Column;
 import org.erik.code.model.Project;
 import org.erik.code.model.Table;
 import org.erik.code.model.Task;
+import org.erik.code.parser.XmlParser;
 import org.erik.code.provider.DatabaseProvider;
 import org.erik.code.provider.DatabaseProviderFactory;
 import org.erik.code.utils.DBUtils;
@@ -27,6 +28,11 @@ public class GenerationOrganizer {
 
     /** 日志对象 */
     private static final Logger LOG = LoggerFactory.getLogger(GenerationOrganizer.class);
+
+    public GenerationOrganizer(String config) {
+        XmlParser xmlParser = new XmlParser();
+        xmlParser.parseConfigXml(config);
+    }
 
     /**
      * 代码生成

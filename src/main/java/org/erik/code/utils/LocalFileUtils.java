@@ -101,7 +101,8 @@ public class LocalFileUtils {
             File targetDir = new File(filePath.substring(0, filePath.lastIndexOf("/")));
             if (!targetDir.exists())
                 targetDir.mkdirs();
-            FileWriter targetFileWriter = new FileWriter(targetFile);
+            OutputStreamWriter targetFileWriter = new OutputStreamWriter(new FileOutputStream(targetFile),
+                    EasyCodeContext.getTargetEncoding());
             targetFileWriter.write(template);
             targetFileWriter.close();
 

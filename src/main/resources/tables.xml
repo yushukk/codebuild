@@ -3,7 +3,7 @@
     <constant name="modelDir" value="freemall-common"/>
     <constant name="basePackage" value="com.tmall.freemall.common.model.dataobject.crm"/>
     <constant name="daoDir" value="freemall-dao"/>
-    <table name="member_level" desc="会员等级设置">
+    <table name="crm_case_result" desc="用例结果">
         <tasks>
             <task name="model"/>
             <task name="sqlmap"/>
@@ -11,14 +11,12 @@
             <task name="daoImpl"/>
         </tasks>
     </table>
-    <table name="member_extend" desc="会员拓展信息设置">
+    <!--<table name="validate" desc="验证信息">
         <tasks>
             <task name="model"/>
-            <task name="sqlmap"/>
-            <task name="dao"/>
-            <task name="daoImpl"/>
+
         </tasks>
-    </table>
+    </table>-->
 
     <tasks>
         <task name="model"

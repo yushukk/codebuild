@@ -156,4 +156,8 @@ public class EasyCodeContext {
     public static String getEncoding(){
         return getConstant("encoding");
     }
+
+    public static String getTargetEncoding(){
+        return getConstant("targetEncoding");
+    }
 }

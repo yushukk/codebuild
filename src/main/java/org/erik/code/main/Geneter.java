@@ -9,9 +9,7 @@ import org.erik.code.parser.XmlParser;
 public class Geneter {
 
     public static void main(String[] args) {
-        XmlParser xmlParser = new XmlParser();
-        xmlParser.parseConfigXml("config.xml");
-        GenerationOrganizer generationOrganizer = new GenerationOrganizer();
+        GenerationOrganizer generationOrganizer = new GenerationOrganizer("config.xml");
         generationOrganizer.codeGenerate();
     }
 }
