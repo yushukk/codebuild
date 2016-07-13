@@ -95,14 +95,18 @@ public class LocalFileUtils {
         return fileMap.get(template);
     }
 
-    public static void writeFile(String filePath, String template) {
+    public static void writeFile(String filePath, String template){
+        writeFile(filePath,template,false);
+    }
+
+    public static void writeFile(String filePath, String template,boolean isXml) {
         try {
             File targetFile = new File(filePath);
             File targetDir = new File(filePath.substring(0, filePath.lastIndexOf("/")));
             if (!targetDir.exists())
                 targetDir.mkdirs();
             OutputStreamWriter targetFileWriter = new OutputStreamWriter(new FileOutputStream(targetFile),
-                    EasyCodeContext.getTargetEncoding());
+                    isXml ? "UTF-8" : EasyCodeContext.getTargetEncoding());
             targetFileWriter.write(template);
             targetFileWriter.close();
 

@@ -1,8 +1,8 @@
 package ${packageName};
 
-import ${modelLongClass};
+import ${model.packageName}.${model.className};
+import ${dao.packageName}.${dao.className};
 
-import ${daoLongClass};
 
 import java.util.List;
 
@@ -12,36 +12,21 @@ import java.util.List;
 * User: ${creator}
 * Date: ${date}
 */
-public class ${generatedShotClassName}   extends BaseDao implements ${daoShortClass}{
+public class ${className}  implements ${dao.className}{
 
 
-    /**
-    * insert ${firstLowerEntityName}
-    * @param ${modelShortLowerClass}
-    * @return
-    */
     @Override
-    public Integer insert${entityName}(${modelShortClass} ${modelShortLowerClass}) {
-        return crmSqlMapClientNormal.update("${firstLowerEntityName}.insert" , ${modelShortLowerClass});
+    public Integer insert${model.modelName}(${model.className} ${model.lowerClassName}) {
+        return crmSqlMapClientNormal.update("${model.lowerClassName}.insert" , ${model.lowerClassName});
     }
 
-    /**
-    * update ${firstLowerEntityName}
-    * @param ${modelShortLowerClass}
-    * @return
-    */
     @Override
-    public Integer update${entityName}(${modelShortClass} ${modelShortLowerClass}) {
-        return crmSqlMapClientNormal.update("${firstLowerEntityName}.update" , ${modelShortLowerClass});
+    public Integer update${model.modelName}(${model.className} ${model.lowerClassName}) {
+        return crmSqlMapClientNormal.update("${model.lowerClassName}.update" , ${model.lowerClassName});
     }
 
-    /**
-    * get ${firstLowerEntityName}List
-    * @param ${modelShortLowerClass}
-    * @return
-    */
     @Override
-    public List<${modelShortClass}> get${entityName}List(${modelShortClass} ${modelShortLowerClass}) {
-        return crmSqlMapClientNormal.queryForList("${firstLowerEntityName}.select" , ${modelShortLowerClass});
+    public List<${model.className}> get${model.modelName}List(${model.className} ${model.lowerClassName}) {
+        return crmSqlMapClientNormal.queryForList("${model.lowerClassName}.select" , ${model.lowerClassName});
     }
 }

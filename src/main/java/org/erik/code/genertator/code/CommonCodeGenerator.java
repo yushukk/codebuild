@@ -8,6 +8,7 @@ import org.erik.code.model.Column;
 import org.erik.code.model.Table;
 import org.erik.code.model.Task;
 import org.erik.code.utils.LocalFileUtils;
+import org.erik.code.utils.NameUtils;
 import org.erik.code.utils.VelocityUtils;
 
 import java.util.*;
@@ -52,7 +53,10 @@ public class CommonCodeGenerator{
         for(String taskName : allTask.keySet()){
             Map<String,Object> taskModel = new HashMap<String, Object>();
             taskModel.put("className",allTask.get(taskName).getGeneratedShotClassName(table.getClassName()));
+            taskModel.put("modelName",table.getClassName());
+            taskModel.put("lowerModelName", NameUtils.getFirstLowerName(table.getClassName()));
             taskModel.put("packageName",allTask.get(taskName).getPackageName());
+            taskModel.put("lowerClassName",allTask.get(taskName).getGeneratedShotLowerClassName(table.getClassName()));
             context.put(taskName,taskModel);
         }
 
@@ -71,7 +75,7 @@ public class CommonCodeGenerator{
         srcDir = StringUtils.isBlank(srcDir) ? "" : srcDir + "/";
         String packageFileDir = task.getGeneratedFileName(table.getClassName());
         String filePath = targetDir + moduleDir + srcDir + packageFileDir;
-        LocalFileUtils.writeFile(filePath, template);
+        LocalFileUtils.writeFile(filePath, template , ".xml".equals(task.getPropertyMap().get("suffix").getValue()));
     }
 
     /**

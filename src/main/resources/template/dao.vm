@@ -1,6 +1,6 @@
 package ${packageName};
 
-import ${modelLongClass};
+import ${model.packageName}.${model.className};
 import java.util.List;
 
 /**
@@ -9,29 +9,29 @@ import java.util.List;
 * User: ${creator}
 * Date: ${date}
 */
-public interface ${generatedShotClassName} {
+public interface ${className} {
 
 
     /**
-    * insert ${firstLowerEntityName}
-    * @param ${modelShortLowerClass}
+    * insert ${model.modelName}
+    * @param ${model.lowerClassName}
     * @return
     */
-    public Integer insert${entityName}(${modelShortClass} ${modelShortLowerClass});
+    Integer insert${model.modelName}(${model.className} ${model.lowerClassName});
 
     /**
-    * update ${firstLowerEntityName}
-    * @param ${modelShortLowerClass}
+    * update ${model.modelName}
+    * @param ${model.lowerClassName}
     * @return
     */
-    public Integer update${entityName}(${modelShortClass} ${modelShortLowerClass});
+    Integer update${model.modelName}(${model.className} ${model.lowerClassName});
 
     /**
-    * get ${firstLowerEntityName}List
-    * @param ${modelShortLowerClass}
+    * get ${model.modelName}List
+    * @param ${model.lowerClassName}
     * @return
     */
-    public List<${modelShortClass}> get${entityName}List(${modelShortClass} ${modelShortLowerClass});
+    List<${model.className}> get${model.modelName}List(${model.className} ${model.lowerClassName});
 
 
 }
