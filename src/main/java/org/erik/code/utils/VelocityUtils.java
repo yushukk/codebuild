@@ -73,4 +73,15 @@ public class VelocityUtils {
         Velocity.evaluate(context,w,"AAA",orgi);
         return w.toString();
     }
+
+    public static String parseString(String orgi, Map<String, String> context) {
+        StringWriter w = new StringWriter();
+
+        for(String key:context.keySet()){
+            velocityContext.put(key,context.get(key));
+        }
+        Velocity.evaluate(velocityContext,w,"AAA",orgi);
+
+        return w.toString();
+    }
 }

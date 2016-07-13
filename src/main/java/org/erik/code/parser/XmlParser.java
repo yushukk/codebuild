@@ -8,6 +8,7 @@ import org.erik.code.exceptions.EasyCodeException;
 import org.erik.code.extra.EasyCodePlugin;
 import org.erik.code.model.*;
 import org.erik.code.utils.ClassUtils;
+import org.erik.code.utils.LocalFileUtils;
 import org.erik.code.utils.VelocityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,20 +62,22 @@ public class XmlParser {
      */
     public static void parseConfigXml(String configFile) {
 
-        LOG.info("开始解析配置文件{}", configFile);
+        String fileAll = EasyCodeContext.getConstant("configPath") + configFile;
+        LOG.info("开始解析配置文件{}", fileAll);
 
         Document doc;
         try {
             //创建xml解析doc对象
-            doc = getDocBuilder().parse(
-                    Thread.currentThread().getContextClassLoader().getResourceAsStream(configFile));
+
+            doc = getDocBuilder().parse(new FileInputStream(fileAll));
+
 
             //解析常量
             Map<String, String> constantMap = parseConstant(doc);
             EasyCodeContext.addConstant(constantMap);
 
             //解析配置文件中的常量使用
-            String context = VelocityUtils.parseTemplate(configFile,
+            String context = VelocityUtils.parseString(LocalFileUtils.getContent(new File(fileAll)),
                     EasyCodeContext.getAllConstant());
 
             //重新构建处理过的配置文件doc对象
@@ -103,11 +108,6 @@ public class XmlParser {
                 } else if (StringUtils.equalsIgnoreCase(node.getNodeName(), XmlTag.INCLUDE_TAG)) {
                     //解析include标签
                     parseIncludeFile(node);
-                } else if (StringUtils.equalsIgnoreCase(node.getNodeName(), XmlTag.TABLE_TAG)) {
-
-                    //解析表配置
-                    Table table = parseTableConfig(node);
-                    EasyCodeContext.addTable(table.getName(), table);
                 } else if (StringUtils.equalsIgnoreCase(node.getNodeName(), XmlTag.TASKS_TAG)) {
 
                     //解析任务配置
@@ -141,7 +141,7 @@ public class XmlParser {
 
             Node taskNode = taskList.item(i);
 
-            if (taskNode.getNodeType() == Node.TEXT_NODE) {
+            if (taskNode.getNodeType() == Node.TEXT_NODE || taskNode.getNodeType() == Node.COMMENT_NODE ) {
                 continue;
             }
             NamedNodeMap namedNodeMap = taskNode.getAttributes();
@@ -287,7 +287,7 @@ public class XmlParser {
             //节点
             Node node = taskNodes.item(i);
 
-            if (node.getNodeType() == Node.TEXT_NODE) {
+            if (node.getNodeType() == Node.TEXT_NODE || node.getNodeType() == Node.COMMENT_NODE) {
                 continue;
             }
             String nodeName = node.getNodeName();

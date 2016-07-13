@@ -53,7 +53,7 @@ public class Table {
     }
 
     public String getClassName() {
-        if(StringUtils.isNotBlank(className)){
+        if(StringUtils.isBlank(className)){
             return NameUtils.getNameWordFirstUpper(name);
         }
         return className;

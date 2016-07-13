@@ -11,6 +11,7 @@ import org.erik.code.utils.LocalFileUtils;
 import org.erik.code.utils.NameUtils;
 import org.erik.code.utils.VelocityUtils;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -61,7 +62,8 @@ public class CommonCodeGenerator{
         }
 
 
-        StringBuilder sbTemp = new StringBuilder(LocalFileUtils.getTemplate(task.getTemplate()));
+        StringBuilder sbTemp = new StringBuilder(LocalFileUtils.getContent(
+                new File(EasyCodeContext.getConstant("configPath") + task.getTemplate())));
         //导入变量 import
         context.put("importSet",getImportSet(sbTemp));
 
