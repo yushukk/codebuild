@@ -15,4 +15,11 @@ public interface DatabaseProvider {
      * @return meta data
      */
     public List<Column> getTableMetaData(String tableName);
+
+    /**
+     * 获取数据表的备注信息
+     * @param tableName
+     * @return
+     */
+    public String getTableDesc(String tableName);
 }

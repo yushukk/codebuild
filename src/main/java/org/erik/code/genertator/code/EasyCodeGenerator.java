@@ -8,6 +8,7 @@ import org.erik.code.model.Task;
  * Created by wandong.cwd on 2014/11/3.
  */
 public interface EasyCodeGenerator {
+
     /**
      * 代码生成方法
      * @param table the table

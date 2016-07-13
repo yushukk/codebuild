@@ -15,6 +15,7 @@ public class XmlTag {
     public static final String INCLUDE_TAG = "include";
     public static final String FILE_ATTR = "file";
     public static final String DESC_ATTR = "desc";
+    public static final String CLASS_NAME = "className";
     public static final String TASKS_TAG = "tasks";
     public static final String TASK_TAG = "task";
     public static final String TABLE_TAG = "table";

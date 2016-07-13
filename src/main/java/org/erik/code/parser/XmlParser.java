@@ -1,6 +1,7 @@
 package org.erik.code.parser;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.velocity.VelocityContext;
 import org.erik.code.context.EasyCodeContext;
 import org.erik.code.context.XmlTag;
 import org.erik.code.exceptions.EasyCodeException;
@@ -112,9 +113,6 @@ public class XmlParser {
                     //解析任务配置
                     Map<String, Task> taskMap = parseTaskConfig(node);
                     EasyCodeContext.addTask(taskMap);
-                } else if (StringUtils.equalsIgnoreCase(node.getNodeName(),XmlTag.PROJECT_TAG)){
-                    Project project = parseProjectConfig(node);
-                    EasyCodeContext.addProject(project);
                 }
             }
         } catch (Exception e) {
@@ -123,49 +121,6 @@ public class XmlParser {
         }
     }
 
-    private static Project parseProjectConfig(Node node) {
-
-        Project project = new Project();
-
-        NodeList nodeList = node.getChildNodes();
-
-        NamedNodeMap namedNodeMap = node.getAttributes();
-        String projectName = namedNodeMap.getNamedItem(XmlTag.NAME_ATTR).getNodeValue();
-        String clazz = namedNodeMap.getNamedItem(XmlTag.CLASS_ATTR).getNodeValue();
-        project.setName(projectName);
-        project.setClazz(clazz);
-        project.setClassInstance(ClassUtils.getProjectGeneratorInstance(clazz));
-
-        Map<String, Property> propertyMap = new HashMap<String, Property>();
-        project.setProperties(propertyMap);
-        if (nodeList == null || nodeList.getLength() == 0) {
-            return null;
-        }
-        //处理属性配置信息
-        for (int i = 0; i < nodeList.getLength(); i++) {
-
-            Node childNode = nodeList.item(i);
-            if (childNode.getNodeType() == Node.TEXT_NODE) {
-                continue;
-            }
-            NamedNodeMap propertyNodeMap = childNode.getAttributes();
-
-            //属性名称
-            String propertyName = propertyNodeMap.getNamedItem(XmlTag.NAME_ATTR).getNodeValue();
-            //属性值
-            String propertyValue = propertyNodeMap.getNamedItem(XmlTag.VALUE_ATTR).getNodeValue();
-
-            if (StringUtils.equalsIgnoreCase(childNode.getNodeName(), XmlTag.PROPERTY_TAG)) {
-                //属性对象
-                Property property = new Property();
-                property.setName(propertyName);
-                property.setValue(propertyValue);
-                propertyMap.put(propertyName, property);
-            }
-        }
-
-        return project;
-    }
 
     /**
      * 解析任务配置
@@ -191,13 +146,9 @@ public class XmlParser {
             }
             NamedNodeMap namedNodeMap = taskNode.getAttributes();
             String taskName = namedNodeMap.getNamedItem(XmlTag.NAME_ATTR).getNodeValue();
-            String clazz = namedNodeMap.getNamedItem(XmlTag.CLASS_ATTR).getNodeValue();
 
             Task task = new Task();
             task.setName(taskName);
-            task.setClazz(clazz);
-
-            task.setClassInstance(ClassUtils.getGeneratorInstance(clazz));
 
             //解析子标签配置信息
             parseChildConfig(taskNode, task);
@@ -227,7 +178,7 @@ public class XmlParser {
         for (int i = 0; i < nodeList.getLength(); i++) {
 
             Node childNode = nodeList.item(i);
-            if (childNode.getNodeType() == Node.TEXT_NODE) {
+            if (childNode.getNodeType() == Node.TEXT_NODE || Node.COMMENT_NODE == childNode.getNodeType()) {
                 continue;
             }
             NamedNodeMap propertyNodeMap = childNode.getAttributes();
@@ -263,16 +214,23 @@ public class XmlParser {
 
         //表名称
         String tableName = tableNodeMap.getNamedItem(XmlTag.NAME_ATTR).getNodeValue();
-        String tableDesc = tableNodeMap.getNamedItem(XmlTag.DESC_ATTR).getNodeValue();
+        Node tableDesc = tableNodeMap.getNamedItem(XmlTag.DESC_ATTR);
+        Node item = tableNodeMap.getNamedItem(XmlTag.CLASS_NAME);
 
         if (StringUtils.isBlank(tableName)) {
             LOG.info("没有指定表名");
             throw new EasyCodeException("没有指定表名");
         }
 
+
         Table table = new Table();
         table.setName(tableName);
-        table.setDesc(tableDesc);
+        if(tableDesc != null){
+            table.setDesc(tableDesc.getNodeName());
+        }
+        if(item != null){
+            table.setClassName(item.getNodeName());
+        }
 
         //解析表的子属性配置信息
         parseTableChildConfig(node, table);

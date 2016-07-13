@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <table name="tpp_account" className=""> <!-- 如不指定className则使用默认驼峰命名 -->
+        <tasks>
+            <task name="model"/>
+        </tasks>
+    </table>
+
+    <tasks>
+        <task name="model">
+            <!-- 模版文件 -->
+            <property name="template" value="template/model.vm"/>
+            <!-- 模块名称,maven的子模块名称 -->
+            <property name="modelName"  value="visa-core"/>
+            <!-- 类名前缀  表名为tpp_person ,前缀为Tmall,后缀为DO，则最终生成的短类名为TmallTppPersonDO -->
+            <property name="beginFix" value=""/>
+            <!-- 类名后缀 -->
+            <property name="endFix" value="DO"/>
+            <!--生成文件后缀名 -->
+            <property name="suffix" value=".java"/>
+            <!-- 文件生成目标,常见有 src/main/java  src/main/resources  src/test/java  src/test/resources -->
+            <property name="srcDir" value="src/main/java"/>
+            <!-- 如果生成类就是包名，资源文件即路径，都以“.”为分隔符 -->
+            <property name="package" value="com.tmall.visa.model"/>
+        </task>
+        <task name="sqlmap">
+            <property name="modelName"  value="visa-dao"/>
+            <property name="beginFix" value=""/>
+            <property name="endFix" value="sqlmap"/>
+            <property name="suffix" value=".xml"/>
+            <property name="targetDir" value="src/main/resources"/>
+            <property name="package" value="com.tmall.visa.dao"/>
+        </task>
+        <task name="dao">
+            <property name="modelName" value="visa-dao"/>
+            <property name="beginFix" value=""/>
+            <property name="endFix" value="DAO"/>
+            <property name="suffix" value=".java"/>
+            <property name="targetDir" value="src/main/java"/>
+            <property name="package" value="com.tmall.visa.dao"/>
+        </task>
+        <task name="daoImpl">
+            <property name="modelName" value="visa-dao"/>
+            <property name="beginFix" value=""/>
+            <property name="endFix" value="DAOImpl"/>
+            <property name="suffix" value=".java"/>
+            <property name="targetDir" value="src/main/java"/>
+            <property name="package" value="com.tmall.visa.dao.impl"/>
+        </task>
+    </tasks>
+</config>

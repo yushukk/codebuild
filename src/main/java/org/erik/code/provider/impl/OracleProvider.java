@@ -90,4 +90,9 @@ public class OracleProvider extends AbstractDatabaseProvider {
         }
         return columnList;
     }
+
+    @Override
+    public String getDesc(String tableName, Connection connection) {
+        return null;
+    }
 }

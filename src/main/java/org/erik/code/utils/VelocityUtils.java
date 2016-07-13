@@ -17,7 +17,7 @@ public class VelocityUtils {
         Velocity.init();
     }
 
-    private static VelocityContext velocityContext = new VelocityContext();
+    private static VelocityContext velocityContext =  new VelocityContext();
 
 
 
@@ -65,7 +65,7 @@ public class VelocityUtils {
     }
 
     public static VelocityContext getVelocityContext() {
-        return velocityContext;
+        return velocityContext = new VelocityContext();
     }
 
     public static String parseString(String orgi, VelocityContext context) {

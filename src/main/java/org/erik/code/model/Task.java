@@ -59,11 +59,11 @@ public class Task {
     }
 
     public String getModuleDir() {
-        return propertyMap.get("moduledir").getValue();
+        return propertyMap.get("modelName").getValue();
     }
 
     public String getSrcDir() {
-        return propertyMap.get("srcdir").getValue();
+        return propertyMap.get("srcDir").getValue();
     }
 
     public String getGeneratedFileName(String fileName) {
@@ -82,15 +82,15 @@ public class Task {
         return propertyMap.get("package").getValue();
     }
 
-    public String getGeneratedShotClassName(String name) {
-        return propertyMap.get("beginFix").getValue() + NameUtils.getNameWordFirstUpper(name) + propertyMap.get("endFix").getValue();
+    public String getGeneratedShotClassName(String className) {
+        return propertyMap.get("beginFix").getValue() + className + propertyMap.get("endFix").getValue();
     }
 
-    public String getGeneratedShotLowerClassName(String name) {
+    public String getGeneratedShotLowerClassName(String className) {
         if (StringUtils.isEmpty(propertyMap.get("beginFix").getValue())) {
-            return NameUtils.getNameWordFirstLower(name) + propertyMap.get("endFix").getValue();
+            return NameUtils.getFirstLowerName(className) + propertyMap.get("endFix").getValue();
         } else {
-            return propertyMap.get("beginFix").getValue() + NameUtils.getNameWordFirstUpper(name) + propertyMap.get("endFix").getValue();
+            return propertyMap.get("beginFix").getValue() + className + propertyMap.get("endFix").getValue();
         }
     }
 

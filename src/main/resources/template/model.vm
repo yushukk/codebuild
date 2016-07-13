@@ -1,7 +1,7 @@
 package ${packageName};
 
 import java.io.Serializable;
-#foreach($im in ${importList})
+#foreach($im in ${importSet})
 import ${im};
 #end
 
@@ -9,16 +9,16 @@ import ${im};
 * ${table.desc}
 *
 * User: ${creator}
-* Date: ${date}
+* Date: ${dateUtil.format(${date},"yyyy/MM/dd")}
 */
-public class ${modelGeneratedShotClassName}  implements Serializable{
+public class ${className}  implements Serializable{
 
     /** serialVersionUID */
     private static final long serialVersionUID = ${serialVersionUID};
 
 #foreach($column in ${table.columns})
     #if(${column.comment})
-    /** ${column.comment} */
+/** ${column.comment} */
     #end
 private ${column.javaType} ${column.camelName};
 

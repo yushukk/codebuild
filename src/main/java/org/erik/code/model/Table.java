@@ -1,6 +1,7 @@
 package org.erik.code.model;
 
-import org.erik.code.model.Column;
+import org.apache.commons.lang.StringUtils;
+import org.erik.code.utils.NameUtils;
 
 import java.util.ArrayDeque;
 import java.util.List;
@@ -12,6 +13,9 @@ import java.util.Queue;
 public class Table {
     public String name;
     public String desc;
+
+    public String className;
+
     public Queue<String> tasks = new ArrayDeque<String>();
 
     public List<Column> columns;
@@ -46,5 +50,16 @@ public class Table {
 
     public Queue<String> getTasks() {
         return tasks;
+    }
+
+    public String getClassName() {
+        if(StringUtils.isNotBlank(className)){
+            return NameUtils.getNameWordFirstUpper(name);
+        }
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 }

@@ -29,9 +29,6 @@ public abstract class AbstractEasyCodeGenerator implements EasyCodeGenerator {
         context.put("serialVersionUID", getSerialVersionUID() + "L");
         StringBuilder sbTemp = new StringBuilder(LocalFileUtils.getTemplate(task.getTemplate()));
 
-        //运行插件
-        this.executePlugin(table, task, context, sbTemp);
-
         this.generate(table, task, context, sbTemp);
 
         String template = VelocityUtils.parseString(sbTemp.toString(), context);

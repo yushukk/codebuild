@@ -91,4 +91,38 @@ public class MysqlProvider extends AbstractDatabaseProvider {
         return columnList;
     }
 
+    @Override
+    public String getDesc(String tableName, Connection connection) {
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ResultSetMetaData rsd = null;
+        try {
+
+            //查询主键
+            String comment = null;
+            pst = connection
+                    .prepareStatement("select table_comment from information_schema.tables where table_name=?");
+            pst.setString(1, tableName.toUpperCase());
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                comment = rs.getString(1);
+            }
+            return comment;
+
+
+        } catch (SQLException e) {
+            throw new EasyCodeException(e);
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                //ignore
+            }
+        }
+    }
 }

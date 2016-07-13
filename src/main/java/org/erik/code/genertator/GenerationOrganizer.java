@@ -1,8 +1,10 @@
 package org.erik.code.genertator;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.VelocityContext;
 import org.erik.code.context.EasyCodeContext;
+import org.erik.code.genertator.code.CommonCodeGenerator;
 import org.erik.code.genertator.code.EasyCodeGenerator;
 import org.erik.code.genertator.project.ProjectGenerator;
 import org.erik.code.model.Column;
@@ -45,9 +47,6 @@ public class GenerationOrganizer {
         //所有的任务配置信息
         Map<String, Task> tasks = EasyCodeContext.getAllTask();
 
-        //获取包含了所有常量的velocityContext
-        VelocityContext context = VelocityUtils.getVelocityContext();
-
         DBUtils.createConnection();
         for (Map.Entry<String, Table> entry : tableMap.entrySet()) {
 
@@ -56,9 +55,10 @@ public class GenerationOrganizer {
                 DatabaseProvider provider = DatabaseProviderFactory.buildProvider();
                 List<Column> columnList = provider.getTableMetaData(table.getName());
                 table.setColumns(columnList);
+                if(StringUtils.isBlank(table.getDesc())){
+                    table.setDesc(provider.getTableDesc(table.getName()));
+                }
             }
-
-
 
             //表的任务
             Queue<String> tableTasks = table.getTasks();
@@ -70,22 +70,10 @@ public class GenerationOrganizer {
                     LOG.info("不存在配置任务{}", tableTask);
                     continue;
                 }
-                EasyCodeGenerator codeGenerator = task.getClassInstance();
-                codeGenerator.doGenerate(table, task, context);
+                CommonCodeGenerator codeGenerator = new CommonCodeGenerator(table,task);
+                codeGenerator.doGenerate();
             }
         }
         DBUtils.closeConnection();
-
-        //开始生成项目代码
-        Map<String, Project> projects = EasyCodeContext.getAllProject();
-        for(String name:projects.keySet()){
-            Project project = projects.get(name);
-            if(project == null){
-                LOG.info("不存在配置项目{}", name);
-                continue;
-            }
-            ProjectGenerator projectGenerator = project.getClassInstance();
-            projectGenerator.doGenerate(project,context);
-        }
     }
 }

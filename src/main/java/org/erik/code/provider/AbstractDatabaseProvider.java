@@ -25,6 +25,12 @@ public abstract class AbstractDatabaseProvider implements DatabaseProvider {
         return getMetaData(tableName, connection);
     }
 
+    @Override
+    public String getTableDesc(String tableName) {
+        Connection connection = DBUtils.getDefaultConnection();
+        return getDesc(tableName,connection);
+    }
+
     /**
      * 获取数据库表元信息
      *
@@ -33,4 +39,10 @@ public abstract class AbstractDatabaseProvider implements DatabaseProvider {
      * @return meta data
      */
     public abstract List<Column> getMetaData(String tableName, Connection connection);
+
+    public abstract String getDesc(String tableName, Connection connection);
+
+
+
+
 }
