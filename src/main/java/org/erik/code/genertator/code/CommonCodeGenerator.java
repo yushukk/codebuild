@@ -62,8 +62,8 @@ public class CommonCodeGenerator{
         }
 
 
-        StringBuilder sbTemp = new StringBuilder(LocalFileUtils.getContent(
-                new File(EasyCodeContext.getConstant("configPath") + task.getTemplate())));
+        StringBuilder sbTemp = new StringBuilder(LocalFileUtils.getTemplate(EasyCodeContext.getConstant("configPath")
+                + task.getTemplate()));
         //导入变量 import
         context.put("importSet",getImportSet(sbTemp));
 

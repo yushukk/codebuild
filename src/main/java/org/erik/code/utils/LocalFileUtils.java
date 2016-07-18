@@ -45,7 +45,7 @@ public class LocalFileUtils {
         }
 
         try {
-            BufferedReader bfReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            BufferedReader bfReader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = bfReader.readLine()) != null) {
@@ -76,8 +76,7 @@ public class LocalFileUtils {
                 encoding = EasyCodeContext.getEncoding();
             }
 
-            BufferedReader bfReader = new BufferedReader(new InputStreamReader(
-                    LocalFileUtils.class.getClassLoader().getResourceAsStream(template),
+            BufferedReader bfReader = new BufferedReader(new InputStreamReader(new FileInputStream(template),
                     encoding));
 
             StringBuilder sb = new StringBuilder();
@@ -110,7 +109,7 @@ public class LocalFileUtils {
             targetFileWriter.write(template);
             targetFileWriter.close();
 
-            LOG.info("生成文件：" + targetFile.getAbsoluteFile());
+            LOG.info("generate file:" + targetFile.getAbsoluteFile());
         } catch (IOException e) {
             LOG.error("生成代码文件失败", e);
         }

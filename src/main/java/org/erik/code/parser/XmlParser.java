@@ -63,7 +63,7 @@ public class XmlParser {
     public static void parseConfigXml(String configFile) {
 
         String fileAll = EasyCodeContext.getConstant("configPath") + configFile;
-        LOG.info("开始解析配置文件{}", fileAll);
+        LOG.info("start parse config file {}", fileAll);
 
         Document doc;
         try {
@@ -81,7 +81,7 @@ public class XmlParser {
                     EasyCodeContext.getAllConstant());
 
             //重新构建处理过的配置文件doc对象
-            doc = getDocBuilder().parse(new ByteArrayInputStream(context.getBytes()));
+            doc = getDocBuilder().parse(new ByteArrayInputStream(context.getBytes("UTF-8")));
 
             NodeList childNodes = doc.getDocumentElement().getChildNodes();
 
