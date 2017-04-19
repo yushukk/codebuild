@@ -4,9 +4,9 @@
     <!-- 数据库配置 -->
     <jdbc name="dialect" value="mysql"/>
     <jdbc name="driverClassName" value="com.mysql.jdbc.Driver"/>
-    <jdbc name="url" value="jdbc:mysql://tddl.daily.alibaba.net:3306/TMALL_TPP_APP?useUnicode=true&amp;characterEncoding=utf-8"/>
-    <jdbc name="username" value="TMALL_TPP_APP"/>
-    <jdbc name="password" value="TMALL_TPP_APP"/>
+    <jdbc name="url" value="jdbc:mysql://IP:3306/DB_NAME?useUnicode=true&amp;characterEncoding=utf-8"/>
+    <jdbc name="username" value="XXXX"/>
+    <jdbc name="password" value="XXXX"/>
 
 
     <!-- 常量配置 -->
