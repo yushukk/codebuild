@@ -11,15 +11,14 @@ public class Geneter {
 
     public static void main(String[] args) {
         Table table = new Table();
-        table.setName("tpp_account");
+        table.setName("business");
         table.setDesc("");//可不填
         table.setClassName("");//可不填
-        table.setName("tpp_account");
         table.addTask("model");
         table.addTask("sqlmap");
         table.addTask("dao");
-        CBGenerator.build().setConfigPath("D:\\buildConfig\\")
-                .setProjectPath("D:\\code\\branches\\20160602_692039_patch_1\\visa\\")
+        CBGenerator.build().setCreator("尘东").setConfigPath("D:\\buildConfigNew\\")
+                .setProjectPath("D:\\code\\git\\godeyes")
                 .setTable(table)
                 .run();
     }

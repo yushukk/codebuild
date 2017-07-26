@@ -22,6 +22,11 @@ public class CBGenerator {
         return this;
     }
 
+    public CBGenerator setCreator(String creator){
+        EasyCodeContext.getAllConstant().put("creator",creator);
+        return this;
+    }
+
     public CBGenerator setProjectPath(String projectPath){
         EasyCodeContext.getAllConstant().put("targetDir",projectPath);
         return this;
