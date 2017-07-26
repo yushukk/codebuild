@@ -1,5 +1,6 @@
 # codebuild
-代码生成工具
+代码生成工具，可自定义模版，自定义类名，灵活方便，程序员专用。
+
 
 ## 快速开始
 下载配置文件：/src/main/resources/buildConfig.zip<br>
