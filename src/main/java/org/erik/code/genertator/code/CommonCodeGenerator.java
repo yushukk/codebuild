@@ -40,22 +40,22 @@ public class CommonCodeGenerator{
         context.put("creator", EasyCodeContext.getConstant("creator"));
 
         //表相关变量
+        context.put("tableClassName",table.getClassName());
+        context.put("lowerTableClassName", NameUtils.getFirstLowerName(table.getClassName()));
+        context.put("table", table); //从table对象取属性
+
+        //任务相关变量
         context.put("packageName", task.getPackageName());
         context.put("className", task.getGeneratedShotClassName(table.getClassName()));
         context.put("lowerClassName", task.getGeneratedShotLowerClassName(table.getClassName()));
-//        context.put("table.name", table.getName());
-//        context.put("table.desc", table.getDesc());
 
-        //属性相关变量
-        context.put("table", table); //从table对象取属性
+
 
         //依赖相关变量，
         Map<String, Task> allTask = EasyCodeContext.getAllTask();
         for(String taskName : allTask.keySet()){
             Map<String,Object> taskModel = new HashMap<String, Object>();
             taskModel.put("className",allTask.get(taskName).getGeneratedShotClassName(table.getClassName()));
-            taskModel.put("modelName",table.getClassName());
-            taskModel.put("lowerModelName", NameUtils.getFirstLowerName(table.getClassName()));
             taskModel.put("packageName",allTask.get(taskName).getPackageName());
             taskModel.put("lowerClassName",allTask.get(taskName).getGeneratedShotLowerClassName(table.getClassName()));
             context.put(taskName,taskModel);

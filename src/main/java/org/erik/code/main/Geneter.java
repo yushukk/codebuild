@@ -11,7 +11,7 @@ public class Geneter {
 
     public static void main(String[] args) {
         Table table = new Table();
-        table.setName("business");
+        table.setName("business");//数据库表名
         table.setDesc("");//可不填
         table.setClassName("");//可不填
         table.addTask("model");
