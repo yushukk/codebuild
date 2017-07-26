@@ -24,7 +24,7 @@
 ````
 serialVersionUID 随机序列号
 date  当前时间，为 java.util.Date类型
-dateUtil 日期工具类 见org.apache.commons.lang.time.DateFormatUtils.DateFormatUtils
+dateUtil 日期工具类 见org.apache.commons.lang.time.DateFormatUtils
 creator  代码作者，见下文入口函数类中的参数
 ````
 
