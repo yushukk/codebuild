@@ -13,11 +13,14 @@ import org.erik.code.utils.VelocityUtils;
 
 import java.io.File;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Created by 尘东 on 2016/7/12.
  */
 public class CommonCodeGenerator{
+
+    final static Pattern  reg = Pattern.compile("^\\s+(\\#end|\\#foreach|\\#if|\\#else|\\#set)",Pattern.MULTILINE);
 
     private Task task;
 
@@ -67,7 +70,11 @@ public class CommonCodeGenerator{
         //导入变量 import
         context.put("importSet",getImportSet(sbTemp));
 
-        String template = VelocityUtils.parseString(sbTemp.toString(), context);
+        // 替换 velocity标签的行首空格，做对齐用
+        String sbTempNoSpace = reg.matcher(sbTemp).replaceAll("$1");
+
+
+        String template = VelocityUtils.parseString(sbTempNoSpace, context);
 
         String targetDir = EasyCodeContext.getConstant("targetDir");
         targetDir = StringUtils.isBlank(targetDir) ? "" : targetDir + "/";
