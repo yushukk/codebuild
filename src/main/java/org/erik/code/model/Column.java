@@ -2,6 +2,7 @@ package org.erik.code.model;
 
 import org.apache.commons.lang.StringUtils;
 import org.erik.code.context.EasyCodeContext;
+import org.erik.code.exceptions.EasyCodeException;
 import org.erik.code.utils.NameUtils;
 
 /**
@@ -70,7 +71,11 @@ public class Column {
     }
 
     public String getJavaType() {
-        return getClassName(EasyCodeContext.getDataConvertType(jdbcType).getJavaClass());
+        ConvertType dataConvertType = EasyCodeContext.getDataConvertType(dbType);
+        if(dataConvertType == null){
+            throw new EasyCodeException("undefined db type：" + dbType);
+        }
+        return getClassName(dataConvertType.getJavaClass());
     }
 
     protected String getClassName(String qualifiedClassName) {

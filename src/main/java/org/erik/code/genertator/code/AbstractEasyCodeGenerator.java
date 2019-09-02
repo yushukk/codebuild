@@ -40,7 +40,7 @@ public abstract class AbstractEasyCodeGenerator implements EasyCodeGenerator {
         String srcDir = task.getSrcDir();
         srcDir = StringUtils.isBlank(srcDir) ? "" : srcDir + "/";
         String fileName = (String) context.get("fileName");
-        String packageFileDir = task.getGeneratedFileName(fileName);
+        String packageFileDir = task.getGeneratedFileName(table);
         String filePath = targetDir + moduleDir + srcDir + packageFileDir;
         LocalFileUtils.writeFile(filePath, template);
     }

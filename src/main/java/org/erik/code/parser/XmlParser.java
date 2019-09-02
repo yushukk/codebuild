@@ -62,7 +62,7 @@ public class XmlParser {
      */
     public static void parseConfigXml(String configFile) {
 
-        String fileAll = EasyCodeContext.getConstant("configPath") + configFile;
+        String fileAll = EasyCodeContext.getConfigPath() + configFile;
         LOG.info("start parse config file {}", fileAll);
 
         Document doc;

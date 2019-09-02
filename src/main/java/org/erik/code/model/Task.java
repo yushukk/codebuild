@@ -66,7 +66,41 @@ public class Task {
         return propertyMap.get("srcDir").getValue();
     }
 
-    public String getGeneratedFileName(String fileName) {
+    public boolean fileNameIsNull() {
+        return propertyMap.get("fileName") == null;
+    }
+
+    public String getFileName() {
+        return propertyMap.get("fileName").getValue();
+    }
+
+    public String fileNameReplaceBefore() {
+        return propertyMap.get("fileNameReplace").getValue().split(",")[0];
+    }
+
+    public String fileNameReplaceWith() {
+        return propertyMap.get("fileNameReplace").getValue().split(",")[1];
+    }
+
+    public boolean fileNameReplaceIsNull() {
+        return propertyMap.get("fileNameReplace") == null
+            || propertyMap.get("fileNameReplace").getValue().split(",").length < 2;
+    }
+
+
+    public String getGeneratedFileName(Table table) {
+        String fileName = table.getClassName();
+        if(!fileNameIsNull()){
+            fileName = getFileName();
+            String key = "\\$\\{classNameUnderScoreCase}";
+            String key2 = "${classNameUnderScoreCase}";
+            if(fileName.indexOf(key2) >= 0){
+                fileName = fileName.replaceAll(key,NameUtils.toHump(table.getClassName()));
+            }
+        }
+        if(!fileNameReplaceIsNull()){
+            fileName = fileName.replaceAll(fileNameReplaceBefore(),fileNameReplaceWith());
+        }
         return getPackageName().replace(".", "/") + "/" + getFullName(fileName) + propertyMap.get("suffix").getValue();
     }
 

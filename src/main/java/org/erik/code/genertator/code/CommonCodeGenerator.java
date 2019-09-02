@@ -75,7 +75,8 @@ public class CommonCodeGenerator{
         moduleDir = StringUtils.isBlank(moduleDir) ? "" : moduleDir + "/";
         String srcDir = task.getSrcDir();
         srcDir = StringUtils.isBlank(srcDir) ? "" : srcDir + "/";
-        String packageFileDir = task.getGeneratedFileName(table.getClassName());
+
+        String packageFileDir = task.getGeneratedFileName(table);
         String filePath = targetDir + moduleDir + srcDir + packageFileDir;
         LocalFileUtils.writeFile(filePath, template , ".xml".equals(task.getPropertyMap().get("suffix").getValue()));
     }

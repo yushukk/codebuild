@@ -6,6 +6,7 @@ import org.erik.code.model.Project;
 import org.erik.code.model.Table;
 import org.erik.code.model.Task;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -152,6 +153,28 @@ public class EasyCodeContext {
      */
     public static String getConstant(String name) {
         return constantMap.get(CONSTANT_KEY + name);
+    }
+
+
+    public static String getConfigPath() {
+        String path = (String)constantMap.get("configPath");
+        if (path == null) {
+            URL resource = EasyCodeContext.class.getResource("/");
+            path = resource.getPath();
+            constantMap.put("configPath", path);
+        }
+
+        return path;
+    }
+
+    public static String getProjectPath() {
+        String targetDir = (String)constantMap.get("targetDir");
+        if (targetDir == null) {
+            targetDir = System.getProperty("user.dir");
+            constantMap.put("targetDir", targetDir);
+        }
+
+        return targetDir;
     }
 
     public static String getEncoding(){

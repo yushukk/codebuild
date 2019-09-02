@@ -77,4 +77,27 @@ public class NameUtils {
 
     }
 
+    /**
+     * 将驼峰命名转换成下划线命名法
+     * @param str
+     * @return
+     */
+    public static String toHump(String str) {
+        String rs = "";
+
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (Character.isUpperCase(c)) {
+                if(i == 0){
+                    rs += Character.toLowerCase(c);
+                }else{
+                    rs += "_" + Character.toLowerCase(c);
+                }
+            } else {
+                rs += c;
+            }
+        }
+        return rs;
+    }
+
 }
